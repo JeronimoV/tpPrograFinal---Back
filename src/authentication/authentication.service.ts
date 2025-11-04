@@ -3,11 +3,12 @@ import { Users } from '../users/schema/users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from "bcrypt"
+import { AuthService } from 'src/utils/auth/auth.service';
 
 @Injectable()
 export class AuthenticationService {
 
-    constructor(@InjectModel(Users.name) private userModel : Model<Users>){}
+    constructor(@InjectModel(Users.name) private userModel : Model<Users>, private jwt : AuthService){}
 
     async verifyRegister(data : any){ //Este metodo es usado por userService, no es utilizado aqui, ya que la creacion de usuarios es delegado a ese otro modulo
         try {
@@ -43,13 +44,15 @@ export class AuthenticationService {
             
             const comparationResult = await bcrypt.compare(password, userFound.password)
             if(comparationResult){
+                const token = this.jwt.generateToken(userFound.id, userFound.userName);
                 return {
                     name : userFound.name,
                     surname: userFound.surname,
                     email: userFound.email,
                     username: userFound.userName,
                     fechaNacimiento : userFound.fechaNacimiento,
-                    descripcion: userFound.descripcion
+                    descripcion: userFound.descripcion,
+                    token: token
                 }
             }else{
                 throw new UnauthorizedException("La contraseña no es correcta")
