@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
       secret: "alaverga",
       signOptions: { expiresIn: '60s' },
     }),],
-  providers: [AuthService]
+  providers: [AuthService],
+  exports: [AuthService]
 })
 export class AuthModule {}
