@@ -11,8 +11,8 @@ export class UsersController {
             return this.usersService.find(username);
     }
 
-    @Post()
     @UseGuards(AuthGuard)
+    @Post()
     createUser(@Body() data : any){
         return this.usersService.create(data);
     }
