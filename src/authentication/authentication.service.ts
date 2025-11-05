@@ -44,7 +44,7 @@ export class AuthenticationService {
             
             const comparationResult = await bcrypt.compare(password, userFound.password)
             if(comparationResult){
-                const token = this.jwt.signAsync({id: userFound.id, userName: userFound.userName});
+                const token = await this.jwt.signAsync({id: userFound.id, userName: userFound.userName});
                 return {
                     name : userFound.name,
                     surname: userFound.surname,
