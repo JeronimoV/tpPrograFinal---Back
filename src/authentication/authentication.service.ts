@@ -3,12 +3,12 @@ import { Users } from '../users/schema/users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from "bcrypt"
-import { AuthService } from '../utils/auth/auth.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthenticationService {
 
-    constructor(@InjectModel(Users.name) private userModel : Model<Users>, private jwt : AuthService){}
+    constructor(@InjectModel(Users.name) private userModel : Model<Users>, private jwt : JwtService){}
 
     async verifyRegister(data : any){ //Este metodo es usado por userService, no es utilizado aqui, ya que la creacion de usuarios es delegado a ese otro modulo
         try {
@@ -44,7 +44,7 @@ export class AuthenticationService {
             
             const comparationResult = await bcrypt.compare(password, userFound.password)
             if(comparationResult){
-                const token = this.jwt.generateToken(userFound.id, userFound.userName);
+                const token = this.jwt.signAsync({id: userFound.id, userName: userFound.userName});
                 return {
                     name : userFound.name,
                     surname: userFound.surname,

@@ -6,12 +6,12 @@ import { AuthGuard } from '../utils/guards/auth.guard';
 export class UsersController {
     constructor(private readonly usersService : UsersService){}
 
+    @UseGuards(AuthGuard)
     @Get(":username")
     getUserByUserName(@Param("username") username : any){
             return this.usersService.find(username);
     }
 
-    @UseGuards(AuthGuard)
     @Post()
     createUser(@Body() data : any){
         return this.usersService.create(data);

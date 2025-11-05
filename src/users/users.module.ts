@@ -5,10 +5,8 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { AuthenticationModule } from 'src/authentication/authentication.module';
 import { CloudinaryModule } from 'src/utils/cloudinary/cloudinary.module';
-import { AuthModule } from 'src/utils/auth/auth.module';
-
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Users.name, schema: UsersSchema }]), AuthenticationModule, CloudinaryModule, AuthModule],
+  imports: [MongooseModule.forFeature([{ name: Users.name, schema: UsersSchema }]), AuthenticationModule, CloudinaryModule],
   controllers: [UsersController],
   providers: [UsersService]
 })
