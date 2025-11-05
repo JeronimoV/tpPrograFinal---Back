@@ -49,7 +49,7 @@ export class AuthenticationService {
                     name : userFound.name,
                     surname: userFound.surname,
                     email: userFound.email,
-                    username: userFound.userName,
+                    userName: userFound.userName,
                     fechaNacimiento : userFound.fechaNacimiento,
                     descripcion: userFound.descripcion,
                     token: token

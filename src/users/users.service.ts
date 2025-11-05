@@ -19,7 +19,8 @@ export class UsersService {
             data.password = await bcrypt.hash(data.password, 8);
             const newUSer = new this.userModel(data);
             await newUSer.save();
-            return this.authService.login(dataCopy);
+            const result = await this.authService.login(dataCopy);
+            return result;
         } catch (error) {
             console.log("Error " + error);
             throw error;
