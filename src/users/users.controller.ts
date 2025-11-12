@@ -10,6 +10,11 @@ export class UsersController {
             return this.usersService.find(username);
     }
 
+    @Get("id/:id")
+    getUserById(@Param("id") id : any){
+        return this.usersService.findId(id)
+    }
+
     @Post()
     createUser(@Body() data : any){
         return this.usersService.create(data);
