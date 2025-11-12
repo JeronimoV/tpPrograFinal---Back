@@ -1,6 +1,5 @@
 import { Controller, Get, Post , Body, Param, UseGuards} from '@nestjs/common';
 import { UsersService } from './users.service';
-import { AuthGuard } from '../utils/guards/auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -14,5 +13,20 @@ export class UsersController {
     @Post()
     createUser(@Body() data : any){
         return this.usersService.create(data);
+    }
+
+    @Post("like")
+    likePost(@Body() data : any){
+        return this.usersService.saveLike(data);
+    }
+
+    @Post("dislike")
+    noLikePost(@Body() data : any){
+        return this.usersService.removeLike(data);
+    }
+
+    @Get("getLikes/:userId")
+    getUserLikes(@Param("userId") data : any){
+        return this.usersService.getLikes(data);
     }
 }

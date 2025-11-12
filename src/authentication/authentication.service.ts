@@ -46,12 +46,14 @@ export class AuthenticationService {
             if(comparationResult){
                 const token = await this.jwt.signAsync({id: userFound.id, userName: userFound.userName});
                 return {
+                    _id: userFound._id,
                     name : userFound.name,
                     surname: userFound.surname,
                     email: userFound.email,
                     userName: userFound.userName,
                     fechaNacimiento : userFound.fechaNacimiento,
                     descripcion: userFound.descripcion,
+                    image: userFound.image,
                     token: token
                 }
             }else{

@@ -9,10 +9,6 @@ export class CloudinaryService {
                     {
                         resource_type: "auto",
                         folder: "app",
-                        transformation: [
-                            {width: 300, height: 300, crop: "fill"},
-                            {quality: "auto"},
-                        ]
                     },
                     (error, result) => {
                         if(error) return reject(error);
