@@ -8,6 +8,7 @@ async function bootstrap() {
     origin: "https://tp-progra-final-front.vercel.app",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
   app.use(json({ limit: '10mb' }));
   app.use(urlencoded({ extended: true, limit: '10mb' }));
