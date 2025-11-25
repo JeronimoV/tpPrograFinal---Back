@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, ConflictException, ExecutionContext, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { Users } from '../users/schema/users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -54,7 +54,8 @@ export class AuthenticationService {
                     fechaNacimiento : userFound.fechaNacimiento,
                     descripcion: userFound.descripcion,
                     image: userFound.image,
-                    token: token
+                    token: token,
+                    admin: userFound.admin
                 }
             }else{
                 throw new UnauthorizedException("La contraseña no es correcta")
@@ -77,6 +78,29 @@ export class AuthenticationService {
             }
         }else{
             return [false];
+        }
+    }
+
+    async verificarJWT(token : string){
+        if(!token){
+          throw new UnauthorizedException()
+        }
+        try {
+
+            const spliterHeader = token.split(" ");
+
+            console.log(spliterHeader[1]);
+            
+
+          const payload = await this.jwt.verifyAsync(spliterHeader[1], {
+            secret: "alaverga"
+          })
+          return payload;
+        } catch (error) {
+          console.log(error);
+          
+          
+          throw error;
         }
     }
 

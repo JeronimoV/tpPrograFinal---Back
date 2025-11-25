@@ -22,6 +22,8 @@ export class Users extends Document{
     image: string
     @Prop({type: Types.ObjectId, ref: "Post"})
     likes: Post[]
+    @Prop({default: false})
+    admin : boolean
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users);
