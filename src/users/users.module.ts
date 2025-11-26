@@ -10,6 +10,7 @@ import { PostsModule } from 'src/posts/posts.module';
   imports: [MongooseModule.forFeature([{ name: Users.name, schema: UsersSchema }]), AuthenticationModule, PostsModule,CloudinaryModule],
   controllers: [UsersController],
   providers: [UsersService],
+  exports: [UsersService]
 })
 
 export class UsersModule {}

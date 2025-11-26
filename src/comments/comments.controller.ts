@@ -24,4 +24,14 @@ export class CommentsController {
     editComment(@Body() data : any){
         return this.commentService.edit(data);
     }
+
+    @Post("/commentDate")
+    getCommentDate(@Body() data : any){
+        return this.commentService.getCommentsFromDate(data);
+    }
+
+    @Post("/commentFromPost")
+    getCommentPosts(@Body() data : any){
+        return this.commentService.getCommentsFromPosts(data);
+    }
 }

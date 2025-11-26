@@ -9,11 +9,12 @@ import { CloudinaryService } from './utils/cloudinary/cloudinary.service';
 import { CloudinaryModule } from './utils/cloudinary/cloudinary.module';
 import { ConfigModule } from '@nestjs/config';
 import { CommentsModule } from './comments/comments.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
       isGlobal: true,
-    }),MongooseModule.forRoot("mongodb+srv://jeronimo:jero2003@red-social.nspnwlb.mongodb.net/Red-Social?appName=red-social"),UsersModule, AuthenticationModule, PostsModule, CloudinaryModule, CommentsModule],
+    }),MongooseModule.forRoot("mongodb+srv://jeronimo:jero2003@red-social.nspnwlb.mongodb.net/Red-Social?appName=red-social"),UsersModule, AuthenticationModule, PostsModule, CloudinaryModule, CommentsModule, AdminModule],
   controllers: [AppController],
   providers: [AppService, CloudinaryService],
 })

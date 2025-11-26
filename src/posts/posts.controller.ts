@@ -25,4 +25,9 @@ export class PostsController {
     deletePost(@Param("id") id : any){
         return this.postService.delete(id)
     }
+
+    @Post("/postDate")
+    getPostDate(@Body() data : any){
+        return this.postService.getPostsFromDate(data);
+    }
 }

@@ -24,6 +24,8 @@ export class Users extends Document{
     likes: Post[]
     @Prop({default: false})
     admin : boolean
+    @Prop({default: true})
+    userEnabled : boolean
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users);

@@ -39,6 +39,10 @@ export class AuthenticationService {
                 throw new NotFoundException("El usuario con el email " + data.email + " no fue encontrado");
             }
 
+            if(userFound.userEnabled == false){
+                throw new UnauthorizedException("Su usuario se encuentra dado de baja")
+            }
+
             const password = data.password;
             console.log(data);
             

@@ -19,6 +19,7 @@ export class UsersService {
             const dataCopy = {...data};
             data.likes = [];
             data.password = await bcrypt.hash(data.password, 8);
+            data.admin = data.admin.toLowerCase() == "true";
             const newUSer = new this.userModel(data);
             console.log(newUSer);
             

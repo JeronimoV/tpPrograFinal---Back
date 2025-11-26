@@ -8,7 +8,10 @@ import { JwtModule } from '@nestjs/jwt';
 @Module({
     imports: [MongooseModule.forFeature([{ name: Users.name, schema: UsersSchema }]), JwtModule.register({
       global: true,
-      secret: "alaverga"
+      secret: "alaverga",
+       signOptions: {
+        expiresIn: '15m',
+      },
     }),],
     controllers: [AuthenticationController],
     providers: [AuthenticationService],
